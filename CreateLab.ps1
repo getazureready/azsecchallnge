@@ -22,5 +22,3 @@ foreach ($Blob in $Blobs)
 Write-Output "***** IaaS Lab Ready :-) *****"
 new-azurermresourcegroupdeployment -Name azSecChpaasLab -ResourceGroupName $rg2 -TemplateUri https://raw.githubusercontent.com/getazureready/azsecchallnge/master/azuredeploy/azuredeploy-paas.json
 Write-Output "***** Azure Security Challenge Lab Ready :-) *****"
-
-getazureready/azsecchallnge
