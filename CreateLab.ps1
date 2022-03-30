@@ -1,5 +1,5 @@
-$rg = (new-azurermresourcegroup -name Contoso-IaaS -Location westeurope).ResourceGroupName
-$rg2 = (new-azurermresourcegroup -name Contoso-PaaS -Location westeurope).ResourceGroupName
+$rg = (new-azurermresourcegroup -name Contoso-IaaS -Location eastus).ResourceGroupName
+$rg2 = (new-azurermresourcegroup -name Contoso-PaaS -Location eastus).ResourceGroupName
 $outputs = (new-azurermresourcegroupdeployment -Name azSecChLab -ResourceGroupName $rg -TemplateUri https://raw.githubusercontent.com/getazureready/azsecchallnge/master/azuredeploy/azuredeploy.json).Outputs
 
 $DestStorageAccount = $outputs.storageAccountName.Value
