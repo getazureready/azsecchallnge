@@ -8,10 +8,10 @@
         "sqlServerPrefix": "contososql",
         "webAppName": "[concat(variables('webAppPrefix'), uniqueString(subscription().subscriptionId))]",
         "sqlServerName": "[concat(variables('sqlServerPrefix'), uniqueString(subscription().subscriptionId))]",
-        "sourceRepo": "https://github.com/azurecitadel/Contoso-Web.git",
+        "sourceRepo": "https://github.com/getazureready/Contoso-Web.git",
         "sourceBranch": "master",
         "sqlAdministratorLogin": "labuser",
-        "sqlAdministratorLoginPassword": "M1crosoft123",
+        "sqlAdministratorLoginPassword": "Pa55w.rd12345",
         "databaseName": "contosoSQL",
         "databaseEdition": "basic",
         "databaseCollation": "SQL_Latin1_General_CP1_CI_AS"

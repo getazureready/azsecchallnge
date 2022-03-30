@@ -11,7 +11,7 @@
         },
         "adminPassword": {
             "type": "securestring",
-            "defaultValue": "M1crosoft123",
+            "defaultValue": "Pa55w.rd12345",
             "metadata": {
                 "description": ""
             }
@@ -49,7 +49,7 @@
             "apiVersion": "2017-10-01",
             "location": "[resourceGroup().location]",
             "tags": {
-                "displayName": "InfraSec Storage Account"
+                "displayName": "AzSecChLab Storage Account"
             },
             "properties": {
                 "accountType": "Standard_LRS"
@@ -135,7 +135,7 @@
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_A2"
+                    "vmSize": "Standard_D2s_v3"
                 },
                 "osProfile": {
                     "computerName": "[variables('vmNames')[copyIndex()]]",
@@ -209,7 +209,7 @@
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_A2"
+                    "vmSize": "Standard_D2s_v3"
                 },
                 "osProfile": {
                     "computerName": "[variables('vmNames')[copyIndex(2)]]",
@@ -220,7 +220,7 @@
                     "imageReference": {
                         "publisher": "Canonical",
                         "offer": "UbuntuServer",
-                        "sku": "16.04.0-LTS",
+                        "sku": "20.04.0-LTS",
                         "version": "latest"
                     },
                     "osDisk": {
