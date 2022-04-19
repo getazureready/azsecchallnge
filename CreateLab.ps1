@@ -7,7 +7,7 @@ sleep 3
    #Select-AzSubscription -Subscription "Azure Pass - Sponsorship"
 
    $rg = (new-azresourcegroup -name Contoso-IaaS -Location eastus).ResourceGroupName
-   $rg2 = (new-azresourcegroup -name Contoso-PaaS2 -Location eastus).ResourceGroupName
+   $rg2 = (new-azresourcegroup -name Contoso-PaaS -Location eastus).ResourceGroupName
 
    sleep 10
 
@@ -16,13 +16,10 @@ sleep 3
 
  sleep 10
 
-## Old-command## $DestStorageAccount = $outputs.storageAccountName.Value
 $DestStorageAccount = (Get-AzStorageAccount -ResourceGroupName $rg).StorageAccountName
 $SourceStorageAccount = "azsecchalfilesstorage"
 $destStorageKey = (Get-AzStorageAccountKey -ResourceGroupName $rg -accountName $DestStorageAccount).value[0]
-$sasToken = "sp=r&st=2022-04-19T07:34:44Z&se=2022-04-19T15:34:44Z&spr=https&sv=2020-08-04&sr=c&sig=jWpcY%2B6SktQyJ7cdv6ZM4AAX%2BP22hiRIWtOleuFRiZw%3D"
-$sasURL = "https://azsecchalfilesstorage.blob.core.windows.net/azseclab?sp=r&st=2022-04-19T07:34:44Z&se=2022-04-19T15:34:44Z&spr=https&sv=2020-08-04&sr=c&sig=jWpcY%2B6SktQyJ7cdv6ZM4AAX%2BP22hiRIWtOleuFRiZw%3D"
-$SourceStorageContext = New-AzStorageContext -StorageAccountName $SourceStorageAccount -SasToken $sasToken 
+$SourceStorageContext = New-AzStorageContext -StorageAccountName $SourceStorageAccount -StorageAccountKey YL8dSwV4N3OhJgwAEzw/R+npNZOtA064CAy/kweP+aiyW0eP/GTbIbU3Xvgjuo64jEfhH8uRJnTF+AStcnIuBw==
 $DestStorageContext = New-AzStorageContext -StorageAccountName $DestStorageAccount -StorageAccountKey $DestStorageKey
 $SourceStorageContainer = 'azseclab'
 $DestStorageContainer = (new-azstoragecontainer -Name contoso -permission Container -context $DestStorageContext).name
@@ -32,7 +29,7 @@ $DestStorageContainer = (new-azstoragecontainer -Name contoso -permission Contai
 $Blobs = (Get-AzStorageBlob -Context $SourceStorageContext -Container $SourceStorageContainer)
 foreach ($Blob in $Blobs)
 {
-   Write-Output "Moving $Blob.Name"
+   Write-Output "Moving" $Blob.Name
    Start-CopyAzureStorageBlob -Context $SourceStorageContext -SrcContainer $SourceStorageContainer -SrcBlob $Blob.Name `
       -DestContext $DestStorageContext -DestContainer $DestStorageContainer -DestBlob $Blob.Name
 }
