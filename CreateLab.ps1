@@ -3,7 +3,7 @@ $creds=Get-Credential
 
 sleep 3
 
-   Connect-AzAccount -Credential $subcredential
+   Connect-AzAccount -Credential $creds
    #Select-AzSubscription -Subscription "Azure Pass - Sponsorship"
 
    $rg = (new-azresourcegroup -name Contoso-IaaS -Location eastus).ResourceGroupName
@@ -18,12 +18,13 @@ sleep 3
 
 ## Old-command## $DestStorageAccount = $outputs.storageAccountName.Value
 $DestStorageAccount = (Get-AzStorageAccount -ResourceGroupName $rg).StorageAccountName
-$SourceStorageAccount = "infraseclab"
+$SourceStorageAccount = "azsecchalfilesstorage"
 $destStorageKey = (Get-AzStorageAccountKey -ResourceGroupName $rg -accountName $DestStorageAccount).value[0]
-$sasToken = "?sv=2017-04-17&sr=c&si=infraseclab&sig=ONnlr56sGeZt0Qekgs8NFHquG5gGZU2jaFRnKp4bdXM%3D"
-$SourceStorageContext = New-AzStorageContext -StorageAccountName $SourceStorageAccount -SasToken $sasToken
+$sasToken = "sp=r&st=2022-04-19T07:34:44Z&se=2022-04-19T15:34:44Z&spr=https&sv=2020-08-04&sr=c&sig=jWpcY%2B6SktQyJ7cdv6ZM4AAX%2BP22hiRIWtOleuFRiZw%3D"
+$sasURL = "https://azsecchalfilesstorage.blob.core.windows.net/azseclab?sp=r&st=2022-04-19T07:34:44Z&se=2022-04-19T15:34:44Z&spr=https&sv=2020-08-04&sr=c&sig=jWpcY%2B6SktQyJ7cdv6ZM4AAX%2BP22hiRIWtOleuFRiZw%3D"
+$SourceStorageContext = New-AzStorageContext -StorageAccountName $SourceStorageAccount -SasToken $sasToken 
 $DestStorageContext = New-AzStorageContext -StorageAccountName $DestStorageAccount -StorageAccountKey $DestStorageKey
-$SourceStorageContainer = 'infraseclab'
+$SourceStorageContainer = 'azseclab'
 $DestStorageContainer = (new-azstoragecontainer -Name contoso -permission Container -context $DestStorageContext).name
 
  sleep 5
